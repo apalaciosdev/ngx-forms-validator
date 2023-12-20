@@ -50,7 +50,26 @@ this.exampleForm = this.formBuilder.group({
 this.nxgFormsValidatorService.manageValidateErrors(this.exampleForm);
 ```
 
-### 2. Set default language
+### 2. HTML structure
+**Important** to add each input within a unique and personalized **div** for each one.
+
+Also, it is necessary to add the same `id` and `name` as the name assigned to the `formControlName`
+
+```html
+<form [formGroup]="exampleForm" class="exampleForm" *ngIf="exampleData">
+  <span>Name</span>
+  <div>
+    <input type="text" name="name" id="name" formControlName="name">
+  </div>
+
+  <span>Surname</span>
+  <div class="width40">
+    <input type="text" name="surname" id="surname" formControlName="surname">
+  </div>
+</form>  
+```
+
+### 3. Set default language
 Go to the `app.component` file and add these properties to the constructor
 ```typescript 
 import { TranslateService } from 'ngx-forms-validator';
@@ -61,7 +80,7 @@ constructor(private translateService: TranslateService) {
 ```
 You can also see [Available languages](#availableLanguages) that come by default in the library (es_ES & en_US).
 
-### 3. Add your custom literals (optional)
+### 4. Add your custom literals (optional)
 First create a TS file that contains all your literals.
 
 You can name it with the name you want.
