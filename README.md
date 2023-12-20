@@ -21,7 +21,7 @@ $ npm install ngx-forms-validator --save
 
 ```json
 "styles": [
-  "node_modules/ngx-forms-validator/src/lib/assets/styles/styles.scss"
+  "node_modules/ngx-forms-validator/styles/styles.scss"
 ],
 ```
 
