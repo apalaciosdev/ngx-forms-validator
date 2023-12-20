@@ -1,0 +1,206 @@
+/* You can add global styles to this file, and also import other style files */
+// COLORS
+$color-disabled: #f1f1f1;
+$main-color: #c00000;
+$text-color: #333333;
+$succes: #68a225;
+$activat: #71a137;
+$grey4: #666666;
+$grey6: #afb6bd;
+
+
+.error-campo-mensaje {
+  color: $main-color !important;
+  width: auto;
+  text-align: right;
+  font-size: 0.875em !important;
+}
+
+.error-campo-mensaje:empty {
+  display: none;
+}
+
+span#error-campo-mensaje-mesos,
+span#error-campo-mensaje-dies,
+span#error-campo-mensaje-hores {
+  text-align: right;
+  width: 40%;
+}
+
+.error-campo {
+  border: solid 1px $main-color;
+  border-left: solid 3px $main-color;
+  color: $main-color;
+}
+
+.error-campo-checked {
+  border: solid 1px $main-color;
+  border-left: solid 3px $main-color;
+  color: $main-color;
+}
+
+.ok-campo {
+  border: solid 1px $succes;
+  border-left: solid 3px $succes;
+  border-radius: 0.2em;
+}
+
+.ok-campo-div > span {
+  color: transparent;
+  text-shadow: 0 0 0 $activat;
+}
+
+input.ng-valid:not(:placeholder-shown):not(.error-campo),
+textarea.ng-valid:not(:placeholder-shown):not(.error-campo),
+quill-editor.ng-valid:not(.error-campo):not(.novalidate),
+select.ng-valid:not(.error-campo):not(.novalidate) {
+  @extend .ok-campo;
+}
+
+input.ng-valid:not(:placeholder-shown):not(.error-campo) > span,
+textarea.ng-valid:not(:placeholder-shown):not(.error-campo) > span,
+quill-editor.ng-valid:not(.error-campo):not(.novalidate) > span,
+select.ng-valid:not(.error-campo) > span {
+  @extend .ok-campo-div;
+}
+p-calendar.ng-valid:not(.error-campo) > :first-child {
+  > :first-child {
+    @extend .ok-campo;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .p-button-icon-only {
+    border: solid 1px #68a225;
+    border-left: none;
+  }
+}
+p-calendar.ng-valid:not(.error-campo) > :first-child > span {
+  @extend .ok-campo-div;
+}
+.aviso-campo {
+  display: flex;
+  margin-left: auto;
+  font-size: 0.875em;
+}
+
+input,
+select {
+  &:disabled {
+    color: $grey4;
+    cursor: not-allowed;
+    background-color: $color-disabled;
+    border: 1px solid $grey6;
+    opacity: 1;
+  }
+
+  &.ng-touched.ng-dirty.ng-invalid/*,
+	&.ng-touched.ng-pristine.ng-invalid*/ {
+    @extend .error-campo;
+  }
+  &.ng-touched.ng-dirty.ng-invalid1/*,
+	&.ng-touched.ng-pristine.ng-invalid1*/ {
+    @extend .error-campo;
+  }
+}
+input:disabled::placeholder {
+  color: transparent;
+}
+select:disabled {
+  appearance: none;
+}
+
+input[type="file"] {
+  display: none;
+}
+.input-euro {
+  position: relative;
+  margin-left: auto;
+  &.right {
+    input {
+      padding-right: 1em;
+      text-align: left;
+    }
+    &:before {
+      right: 1em;
+    }
+  }
+  &:before {
+    position: absolute;
+    top: 0.8em;
+    content: "€";
+  }
+}
+textarea {
+  &:disabled {
+    background-color: $color-disabled;
+    color: $grey4;
+    cursor: not-allowed;
+    border: 1px solid $grey6;
+  }
+  &.ng-touched.ng-dirty.ng-invalid/*,
+	&.ng-touched.ng-pristine.ng-invalid*/ {
+    @extend .error-campo;
+  }
+  &.ng-touched.ng-dirty.ng-invalid1/*,
+	&.ng-touched.ng-pristine.ng-invalid1*/ {
+    @extend .error-campo;
+  }
+}
+textarea:disabled::placeholder {
+  color: transparent;
+}
+
+input,
+select {
+  &:disabled {
+    color: $grey4;
+    cursor: not-allowed;
+    background-color: $color-disabled;
+    border: 1px solid $grey6;
+    opacity: 1;
+  }
+
+  &.ng-touched.ng-dirty.ng-invalid/*,
+	&.ng-touched.ng-pristine.ng-invalid*/ {
+    @extend .error-campo;
+  }
+  &.ng-touched.ng-dirty.ng-invalid1/*,
+	&.ng-touched.ng-pristine.ng-invalid1*/ {
+    @extend .error-campo;
+  }
+}
+input:disabled::placeholder {
+  color: transparent;
+}
+select:disabled {
+  appearance: none;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+textarea {
+  &:disabled {
+    background-color: $color-disabled;
+    color: $grey4;
+    cursor: not-allowed;
+    border: 1px solid $grey6;
+  }
+  &.ng-touched.ng-dirty.ng-invalid/*,
+	&.ng-touched.ng-pristine.ng-invalid*/ {
+    @extend .error-campo;
+  }
+  &.ng-touched.ng-dirty.ng-invalid1/*,
+	&.ng-touched.ng-pristine.ng-invalid1*/ {
+    @extend .error-campo;
+  }
+}
+textarea:disabled::placeholder {
+  color: transparent;
+}
+
+span {
+  color: $text-color;
+  margin: 0 0.5em;
+}
