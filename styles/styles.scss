@@ -9,63 +9,63 @@ $grey4: #666666;
 $grey6: #afb6bd;
 
 
-.error-campo-mensaje {
+.error-field-message {
   color: $main-color !important;
   width: auto;
   text-align: right;
   font-size: 0.875em !important;
 }
 
-.error-campo-mensaje:empty {
+.error-field-message:empty {
   display: none;
 }
 
-span#error-campo-mensaje-mesos,
-span#error-campo-mensaje-dies,
-span#error-campo-mensaje-hores {
+span#error-field-message-mesos,
+span#error-field-message-dies,
+span#error-field-message-hores {
   text-align: right;
   width: 40%;
 }
 
-.error-campo {
+.error-field {
   border: solid 1px $main-color;
   border-left: solid 3px $main-color;
   color: $main-color;
 }
 
-.error-campo-checked {
+.error-field-checked {
   border: solid 1px $main-color;
   border-left: solid 3px $main-color;
   color: $main-color;
 }
 
-.ok-campo {
+.ok-field {
   border: solid 1px $succes;
   border-left: solid 3px $succes;
   border-radius: 0.2em;
 }
 
-.ok-campo-div > span {
+.ok-field-div > span {
   color: transparent;
   text-shadow: 0 0 0 $activat;
 }
 
-input.ng-valid:not(:placeholder-shown):not(.error-campo),
-textarea.ng-valid:not(:placeholder-shown):not(.error-campo),
-quill-editor.ng-valid:not(.error-campo):not(.novalidate),
-select.ng-valid:not(.error-campo):not(.novalidate) {
-  @extend .ok-campo;
+input.ng-valid:not(:placeholder-shown):not(.error-field),
+textarea.ng-valid:not(:placeholder-shown):not(.error-field),
+quill-editor.ng-valid:not(.error-field):not(.novalidate),
+select.ng-valid:not(.error-field):not(.novalidate) {
+  @extend .ok-field;
 }
 
-input.ng-valid:not(:placeholder-shown):not(.error-campo) > span,
-textarea.ng-valid:not(:placeholder-shown):not(.error-campo) > span,
-quill-editor.ng-valid:not(.error-campo):not(.novalidate) > span,
-select.ng-valid:not(.error-campo) > span {
-  @extend .ok-campo-div;
+input.ng-valid:not(:placeholder-shown):not(.error-field) > span,
+textarea.ng-valid:not(:placeholder-shown):not(.error-field) > span,
+quill-editor.ng-valid:not(.error-field):not(.novalidate) > span,
+select.ng-valid:not(.error-field) > span {
+  @extend .ok-field-div;
 }
-p-calendar.ng-valid:not(.error-campo) > :first-child {
+p-calendar.ng-valid:not(.error-field) > :first-child {
   > :first-child {
-    @extend .ok-campo;
+    @extend .ok-field;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -74,10 +74,10 @@ p-calendar.ng-valid:not(.error-campo) > :first-child {
     border-left: none;
   }
 }
-p-calendar.ng-valid:not(.error-campo) > :first-child > span {
-  @extend .ok-campo-div;
+p-calendar.ng-valid:not(.error-field) > :first-child > span {
+  @extend .ok-field-div;
 }
-.aviso-campo {
+.warning-field {
   display: flex;
   margin-left: auto;
   font-size: 0.875em;
@@ -95,11 +95,11 @@ select {
 
   &.ng-touched.ng-dirty.ng-invalid/*,
 	&.ng-touched.ng-pristine.ng-invalid*/ {
-    @extend .error-campo;
+    @extend .error-field;
   }
   &.ng-touched.ng-dirty.ng-invalid1/*,
 	&.ng-touched.ng-pristine.ng-invalid1*/ {
-    @extend .error-campo;
+    @extend .error-field;
   }
 }
 input:disabled::placeholder {
@@ -139,11 +139,11 @@ textarea {
   }
   &.ng-touched.ng-dirty.ng-invalid/*,
 	&.ng-touched.ng-pristine.ng-invalid*/ {
-    @extend .error-campo;
+    @extend .error-field;
   }
   &.ng-touched.ng-dirty.ng-invalid1/*,
 	&.ng-touched.ng-pristine.ng-invalid1*/ {
-    @extend .error-campo;
+    @extend .error-field;
   }
 }
 textarea:disabled::placeholder {
@@ -162,11 +162,11 @@ select {
 
   &.ng-touched.ng-dirty.ng-invalid/*,
 	&.ng-touched.ng-pristine.ng-invalid*/ {
-    @extend .error-campo;
+    @extend .error-field;
   }
   &.ng-touched.ng-dirty.ng-invalid1/*,
 	&.ng-touched.ng-pristine.ng-invalid1*/ {
-    @extend .error-campo;
+    @extend .error-field;
   }
 }
 input:disabled::placeholder {
@@ -189,11 +189,11 @@ textarea {
   }
   &.ng-touched.ng-dirty.ng-invalid/*,
 	&.ng-touched.ng-pristine.ng-invalid*/ {
-    @extend .error-campo;
+    @extend .error-field;
   }
   &.ng-touched.ng-dirty.ng-invalid1/*,
 	&.ng-touched.ng-pristine.ng-invalid1*/ {
-    @extend .error-campo;
+    @extend .error-field;
   }
 }
 textarea:disabled::placeholder {

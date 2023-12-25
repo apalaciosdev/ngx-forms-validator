@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'lib-ngx-forms-validator',
@@ -10,6 +10,11 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class NgxFormsValidatorComponent {
+export class NgxFormsValidatorComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 
 }

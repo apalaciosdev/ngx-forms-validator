@@ -1,7 +1,7 @@
 {
   "name": "ngx-forms-validator",
-  "version": "1.0.2",
-  "description": "Simple forms validator for Angular",
+  "version": "1.0.10",
+  "description": "Simple forms validator for Angular 14",
   "keywords": [
     "forms validator",
     "validation",
@@ -10,7 +10,7 @@
   "homepage": "https://github.com/apalaciosdev/ngx-forms-validator",
 
   "bugs": {
-    "url": "https://github.com/apalaciosdev/ngx-forms-validator/issues",
+    "url": "https://github.com/apalaciosdev/Angular-Forms-Validator/issues",
     "email": "apalacios.dev@gmail.com"
   },
 
@@ -22,8 +22,8 @@
   },
 
   "peerDependencies": {
-    "@angular/common": "^16.0.0",
-    "@angular/core": "^16.0.0"
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

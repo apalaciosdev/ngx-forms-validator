@@ -1,6 +1,6 @@
 
 <h1 align="center">ngx-forms-validator</h1>
-<p align="center">Useful forms validator for Angular</p>
+<p align="center">Useful forms validator for Angular 14</p>
 
 ## Table of contents
 
@@ -15,7 +15,7 @@
 1. Use npm to install the package
 
 ```terminal
-$ npm install ngx-forms-validator --save
+$ npm install ngx-forms-validator@angular-14
 ```
 
 2. You could either add into your file `angular.json` the next `styles` property
@@ -25,6 +25,12 @@ $ npm install ngx-forms-validator --save
   "node_modules/ngx-forms-validator/styles/styles.scss"
 ],
 ```
+
+## Versions
+Also check all available versions:
+- [Angular 16.X.X](https://www.npmjs.com/package/ngx-forms-validator)
+- [Angular 14.X.X](https://www.npmjs.com/package/ngx-forms-validator/v/angular-14)
+
 
 
 ## Usage
