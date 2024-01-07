@@ -1,4 +1,4 @@
-<p>[Official Docs](https://ngx-forms-validator.netlify.app/)</p>
+- [Official Docs](https://ngx-forms-validator.netlify.app/)
 ![NPM Downloads](https://img.shields.io/npm/dw/ngx-forms-validator) ![NPM License](https://img.shields.io/npm/l/ngx-forms-validator)
 
 <h1 align="center">ngx-forms-validator</h1>
