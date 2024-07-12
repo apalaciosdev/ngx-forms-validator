@@ -1,6 +1,7 @@
 
 - [Official Docs](https://ngx-forms-validator.netlify.app/) <br/><br/><br/>
-![NPM Downloads](https://img.shields.io/npm/dt/ngx-forms-validator) ![NPM License](https://img.shields.io/npm/l/ngx-forms-validator)
+![NPM Downloads](https://img.shields.io/npm/dt/ngx-forms-validator)
+![NPM License](https://img.shields.io/npm/l/ngx-forms-validator)
 <h1 align="center">ngx-forms-validator</h1>
 <p align="center">Useful forms validator for Angular</p>
 
