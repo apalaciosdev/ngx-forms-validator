@@ -37,17 +37,17 @@ export class FormValidatorService {
     let divTag = document.getElementById(key1)?.parentElement || null;
 
     let inputTag = document.getElementById(key1) as HTMLInputElement | null;
-    let oldSpan = document.getElementById(`error-campo-mensaje-${key1}`);
-    let warningMsg = document.getElementById(`warning-campo-mensaje-${key1}`);
+    let oldSpan = document.getElementById(`error-field-message-${key1}`);
+    let warningMsg = document.getElementById(`warning-field-message-${key1}`);
 
     // Missatge a inserir
     let spanTag = document.createElement('span');
-    spanTag.classList.add('error-campo-mensaje');
-    spanTag.setAttribute('id', `error-campo-mensaje-${key1}`);
+    spanTag.classList.add('error-field-message');
+    spanTag.setAttribute('id', `error-field-message-${key1}`);
 
     let warningTag = document.createElement('span');
-    warningTag.setAttribute('id', `warning-campo-mensaje-${key1}`);
-    warningTag.classList.add('aviso-campo');
+    warningTag.setAttribute('id', `warning-field-message-${key1}`);
+    warningTag.classList.add('warning-field');
 
     oldSpan ? oldSpan.remove() : null;
     warningMsg ? warningMsg.remove() : null;
@@ -66,10 +66,10 @@ export class FormValidatorService {
 
     if (form.controls[key1] && form.controls[key1].dirty) {
       divTag ? divTag.append(spanTag) : null;
-      inputTag ? inputTag.classList.add('ng-dirty', 'ng-touched', 'error-campo') : null;
-      inputTag ? inputTag.classList.remove('ok-campo') : null;
+      inputTag ? inputTag.classList.add('ng-dirty', 'ng-touched', 'error-field') : null;
+      inputTag ? inputTag.classList.remove('ok-field') : null;
     } else {
-      inputTag ? inputTag.classList.remove('ng-dirty', 'ok-campo', 'ng-valid') : null;
+      inputTag ? inputTag.classList.remove('ng-dirty', 'ok-field', 'ng-valid') : null;
     }
   }
 
@@ -80,8 +80,8 @@ export class FormValidatorService {
       //Mostra l'avís de que s'ha arribat als máxims caràcters permesos
       // this.checkMaxLength(warningTag, divTag, key1);
     }
-    inputTag ? inputTag.classList.add('ok-campo', 'ng-valid', 'ng-touched') : null;
-    inputTag ? inputTag.classList.remove('error-campo') : null;
+    inputTag ? inputTag.classList.add('ok-field', 'ng-valid', 'ng-touched') : null;
+    inputTag ? inputTag.classList.remove('error-field') : null;
   }
 
   public checkMaxLength(spanTag: any, divTag: any, key1: any) {

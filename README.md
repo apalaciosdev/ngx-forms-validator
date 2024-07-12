@@ -1,3 +1,4 @@
+
 - [Official Docs](https://ngx-forms-validator.netlify.app/) <br/><br/><br/>
 ![NPM Downloads](https://img.shields.io/npm/dt/ngx-forms-validator) ![NPM License](https://img.shields.io/npm/l/ngx-forms-validator)
 <h1 align="center">ngx-forms-validator</h1>
@@ -26,6 +27,12 @@ $ npm install ngx-forms-validator --save
   "node_modules/ngx-forms-validator/styles/styles.scss"
 ],
 ```
+
+## Versions
+Also check all available versions:
+- [Angular 16.X.X](https://www.npmjs.com/package/ngx-forms-validator)
+- [Angular 14.X.X](https://www.npmjs.com/package/ngx-forms-validator/v/angular-14)
+
 
 
 ## Usage
@@ -127,8 +134,9 @@ You can also see the [Custom Validators](#defaultCustomValidators) that come by 
 
 
 <h2 id="availableLanguages">Available Languages</h2>
-- es_ES
-- en_US
+- es_ES (Spanish ES)
+- en_US (English US)
+- eo_EO (Esperanto)
 
 <h2 id="defaultLiterals">Default literals</h2>
 es_ES
@@ -161,6 +169,21 @@ en_US
   - `valueNoExist`: 'The entered value does not exist in the list'
   - `introducedValueNoExist`: 'The requirement does not exist'
   - `number`: 'The field must be numeric
+
+eo_EO
+  - `requiredGraterThan0`: 'La numerika kampo devas esti pli granda ol 0',
+  - `malformedField`: 'Misformita kampo',
+  - `required`: 'Kampo estas postulata',
+  - `email`: 'Malĝusta formato',
+  - `pattern`: 'Malĝusta formato',
+  - `whiteSpaceLine`: 'Malĝusta formato',
+  - `maxlength`: 'Vi superis la maksimuman nombron de signoj',
+  - `minlength`: 'Malĝusta formato',
+  - `invalid`: 'Malĝusta formato',
+  - `maxlengthPermes`: 'Vi atingis la maksimuman nombron de signoj',
+  - `valueNoExist`: 'La enigita valoro ne ekzistas en la listo',
+  - `introducedValueNoExist`: 'La postulo ne ekzistas',
+  - `number`: 'La kampo devas esti numerika'
 
 <h2 id="defaultCustomValidators">Default Custom Validators</h2>
 

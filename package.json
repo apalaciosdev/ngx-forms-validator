@@ -1,14 +1,17 @@
 {
   "name": "ngx-forms-validator",
-  "version": "1.0.2",
+  "version": "1.0.18",
   "description": "Simple forms validator for Angular",
   "keywords": [
     "forms validator",
     "validation",
     "forms"
   ],
-  "homepage": "https://github.com/apalaciosdev/ngx-forms-validator",
-
+  "homepage": "https://ngx-forms-validator.netlify.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apalaciosdev/ngx-forms-validator"
+  },
   "bugs": {
     "url": "https://github.com/apalaciosdev/ngx-forms-validator/issues",
     "email": "apalacios.dev@gmail.com"

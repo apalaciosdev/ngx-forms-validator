@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators
 export class CustomValidators {
   
   public static onlyNumber(control: AbstractControl): ValidationErrors | null {
-    return !control.value.toString().match("^[0-9]*$") ? { number: true } : null;
+    return !control.value?.toString().match(/^[0-9]+$/) ? { number: true } : null;
   }
 
   public static hasWhiteSpaceLine(control: AbstractControl): ValidationErrors | null {
