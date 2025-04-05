@@ -68,7 +68,7 @@ export class CustomValidators {
    * Validates that the control value does not start with a whitespace character.
    * 
    * @param control The form control to validate
-   * @returns ValidationErrors with {whiteSpaceLine: true} if invalid, null if valid
+   * @returns ValidationErrors with {leadingWhiteSpaceLine: true} if invalid, null if valid
    * @example
    * this.formGroup = this.fb.group({
    *   username: ['', [Validators.required, CustomValidators.hasLeadingWhiteSpace]]
@@ -76,7 +76,7 @@ export class CustomValidators {
    */
   public static hasLeadingWhiteSpace(control: AbstractControl): ValidationErrors | null {
     if (control.value?.toString().charAt(0) === ' ') {
-      return { whiteSpaceLine: true };
+      return { leadingWhiteSpaceLine: true };
     } else {
       return null;
     }
@@ -86,7 +86,7 @@ export class CustomValidators {
    * Validates that the control value does not end with a whitespace character.
    * 
    * @param control The form control to validate
-   * @returns ValidationErrors with {whiteSpaceLine: true} if invalid, null if valid
+   * @returns ValidationErrors with {trailingWhiteSpaceLine: true} if invalid, null if valid
    * @example
    * this.formGroup = this.fb.group({
    *   password: ['', [Validators.required, CustomValidators.hasTrailingWhiteSpace]]
@@ -94,7 +94,7 @@ export class CustomValidators {
    */
   public static hasTrailingWhiteSpace(control: AbstractControl): ValidationErrors | null {
     if (control.value?.toString().charAt(control.value.toString().length - 1) === ' ') {
-      return { whiteSpaceLine: true };
+      return { trailingWhiteSpaceLine: true };
     } else {
       return null;
     }
