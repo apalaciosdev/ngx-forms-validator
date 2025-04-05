@@ -129,8 +129,8 @@ Use custom ones included in the lib:
 ```ts
 onlyNumber → key: number
 hasWhiteSpaceLine → key: whiteSpaceLine
-hasLeadingWhiteSpace → key: whiteSpaceLine
-hasTrailingWhiteSpace → key: whiteSpaceLine
+hasLeadingWhiteSpace → key: leadingWhiteSpaceLine
+hasTrailingWhiteSpace → key: trailingWhiteSpaceLine
 introducedValueExists → key: introducedValueNoExist
 maxByte → key: maxLength
 ```
