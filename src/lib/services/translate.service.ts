@@ -1,4 +1,3 @@
-// my-translation.service.ts
 import { Injectable } from '@angular/core';
 import { translationEsEs } from '../assets/i18n/es_ES';
 import { translationEnUs } from '../assets/i18n/en_US';

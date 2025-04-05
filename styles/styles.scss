@@ -1,16 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 // COLORS
-$color-disabled: #f1f1f1;
-$main-color: #c00000;
+$disabled: #f1f1f1;
+$error: #c00000;
 $text-color: #333333;
-$succes: #68a225;
-$activat: #71a137;
+$success: #68a225;
+$activated: #71a137;
 $grey4: #666666;
 $grey6: #afb6bd;
 
 
 .error-field-message {
-  color: $main-color !important;
+  color: $error !important;
   width: auto;
   text-align: right;
   font-size: 0.875em !important;
@@ -28,26 +28,26 @@ span#error-field-message-hores {
 }
 
 .error-field {
-  border: solid 1px $main-color;
-  border-left: solid 3px $main-color;
-  color: $main-color;
+  border: solid 1px $error;
+  border-left: solid 3px $error;
+  color: $error;
 }
 
 .error-field-checked {
-  border: solid 1px $main-color;
-  border-left: solid 3px $main-color;
-  color: $main-color;
+  border: solid 1px $error;
+  border-left: solid 3px $error;
+  color: $error;
 }
 
 .ok-field {
-  border: solid 1px $succes;
-  border-left: solid 3px $succes;
+  border: solid 1px $success;
+  border-left: solid 3px $success;
   border-radius: 0.2em;
 }
 
 .ok-field-div > span {
   color: transparent;
-  text-shadow: 0 0 0 $activat;
+  text-shadow: 0 0 0 $activated;
 }
 
 input.ng-valid:not(:placeholder-shown):not(.error-field),
@@ -70,31 +70,12 @@ select.ng-valid:not(.error-field) > span {
   font-size: 0.875em;
 }
 
-.input-euro {
-  position: relative;
-  margin-left: auto;
-  &.right {
-    input {
-      padding-right: 1em;
-      text-align: left;
-    }
-    &:before {
-      right: 1em;
-    }
-  }
-  &:before {
-    position: absolute;
-    top: 0.8em;
-    content: "€";
-  }
-}
-
 input,
 select {
   &:disabled {
     color: $grey4;
     cursor: not-allowed;
-    background-color: $color-disabled;
+    background-color: $disabled;
     border: 1px solid $grey6;
     opacity: 1;
   }
@@ -115,7 +96,7 @@ select:disabled {
 
 textarea {
   &:disabled {
-    background-color: $color-disabled;
+    background-color: $disabled;
     color: $grey4;
     cursor: not-allowed;
     border: 1px solid $grey6;

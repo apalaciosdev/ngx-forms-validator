@@ -1,100 +1,194 @@
-// form-validator.service.ts
 import { Injectable } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { TranslateService } from './translate.service';
+
+/**
+ * Configuration options for form validation
+ */
+interface ValidationOptions {
+  /**
+   * When true, displays a warning message when an input reaches its maximum length.
+   * This helps users know they've reached the character limit for a field.
+   * Default: false
+   */
+  showMaxLengthWarning?: boolean;
+  
+  /**
+   * When true, immediately marks all form controls as "dirty", causing validation
+   * errors to display right away without waiting for user interaction.
+   * Use this when you want to show all validation errors at once, such as after
+   * a form submission attempt.
+   * Default: false
+   */
+  markFieldsAsDirty?: boolean;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormValidatorService {
-  private translations: any;
+  private translations: Record<string, string>;
 
-  constructor(private myTranslationService: TranslateService) {
-    this.translations = this.myTranslationService.getTranslation();
+  constructor(private translationService: TranslateService) {
+    this.translations = this.translationService.getTranslation();
   }
-  
 
-  public manageValidateErrors(form: any, marcarDirty?: any) {
-    Object.keys(form.value).forEach((key) => {
+ /**
+   * Sets up form validation with visual feedback for all controls in the form
+   * 
+   * @param form The Angular FormGroup to validate
+   * @param options Configuration options:
+   *   - markFieldsAsDirty: When true, immediately shows all validation errors without waiting for user interaction
+   *   - showMaxLengthWarning: When true, shows a warning when an input field reaches its maximum character length
+   */
+  public validateForm(form: FormGroup, options: ValidationOptions = {}): void {
+    const { showMaxLengthWarning = false, markFieldsAsDirty = false } = options;
+
+    Object.keys(form.value).forEach((controlName) => {
+      const control = form.get(controlName);
+      if (!control) return;
+
       setTimeout(() => {
-        if (marcarDirty) {
-          form.controls[key] ? form.controls[key].markAsDirty() : null;
+        if (markFieldsAsDirty) {
+          control.markAsDirty();
         }
-        this.manageValidateFields(key, form);
+        this.validateField(controlName, form);
       });
-      if (key && !marcarDirty) {
-        form.get(key)
-          ? form.get(key).valueChanges.subscribe((value: any) => {
-              setTimeout(() => {
-                this.manageValidateFields(key, form);
-              });
-            })
-          : null;
+
+      if (!markFieldsAsDirty) {
+        control.valueChanges.subscribe(() => {
+          setTimeout(() => {
+            this.validateField(controlName, form, showMaxLengthWarning);
+          });
+        });
       }
     });
   }
 
-  public manageValidateFields(key1: any, form: any) {
-    let divTag = document.getElementById(key1)?.parentElement || null;
+  /**
+   * Validates a single form field and updates UI accordingly
+   * @param controlName Form control name
+   * @param form The form containing the control
+   * @param showMaxLengthWarning Whether to show warning when max length is reached
+   */
+  public validateField(controlName: string, form: FormGroup, showMaxLengthWarning = false): void {
+    const control = form.get(controlName);
+    if (!control) return;
 
-    let inputTag = document.getElementById(key1) as HTMLInputElement | null;
-    let oldSpan = document.getElementById(`error-field-message-${key1}`);
-    let warningMsg = document.getElementById(`warning-field-message-${key1}`);
-
-    // Missatge a inserir
-    let spanTag = document.createElement('span');
-    spanTag.classList.add('error-field-message');
-    spanTag.setAttribute('id', `error-field-message-${key1}`);
-
-    let warningTag = document.createElement('span');
-    warningTag.setAttribute('id', `warning-field-message-${key1}`);
-    warningTag.classList.add('warning-field');
-
-    oldSpan ? oldSpan.remove() : null;
-    warningMsg ? warningMsg.remove() : null;
-
-    if (inputTag && inputTag.nodeName !== 'TABLE' && inputTag.nodeName !== 'DIV') {
-      if (form.controls[key1] && form.controls[key1].errors) {
-        this.manageErrors(spanTag, key1, inputTag, form, divTag);
-      } else {
-        this.manageValid(spanTag, inputTag, warningTag, divTag, key1, form);
-      }
+    const parentElement = document.getElementById(controlName)?.parentElement || null;
+    const inputElement = document.getElementById(controlName) as HTMLInputElement | null;
+    
+    if (!inputElement || inputElement.nodeName === 'TABLE' || inputElement.nodeName === 'DIV') {
+      return;
     }
-  }
 
-  public manageErrors(spanTag: any, key1: any, inputTag: any, form: any, divTag: any) {
-    spanTag.innerHTML = this.orderErrors(Object.keys(form.controls[key1].errors));
+    // Remove existing validation messages
+    this.removeExistingMessages(controlName);
 
-    if (form.controls[key1] && form.controls[key1].dirty) {
-      divTag ? divTag.append(spanTag) : null;
-      inputTag ? inputTag.classList.add('ng-dirty', 'ng-touched', 'error-field') : null;
-      inputTag ? inputTag.classList.remove('ok-field') : null;
+    // Create new message elements
+    const errorElement = this.createMessageElement(controlName, 'error-field-message');
+    const warningElement = this.createMessageElement(controlName, 'warning-field', 'warning');
+
+    // Process validation based on control state
+    if (control.errors) {
+      this.handleErrorState(errorElement, controlName, inputElement, form, parentElement);
     } else {
-      inputTag ? inputTag.classList.remove('ng-dirty', 'ok-field', 'ng-valid') : null;
+      this.handleValidState(errorElement, inputElement, warningElement, parentElement, controlName, form, showMaxLengthWarning);
     }
   }
 
-  public manageValid(spanTag: any, inputTag: any, warningTag: any, divTag: any, key1: any, form: any) {
-    spanTag.innerHTML = this.translations.required;
+  /**
+   * Creates a message element for validation feedback
+   */
+  private createMessageElement(controlName: string, className: string, type = 'error'): HTMLSpanElement {
+    const element = document.createElement('span');
+    element.classList.add(className);
+    element.setAttribute('id', `${type}-field-message-${controlName}`);
+    return element;
+  }
 
-    if (inputTag && inputTag.maxLength && inputTag.maxLength === inputTag.value.length && inputTag.classList.contains('ng-touched') && inputTag.value) {
-      //Mostra l'avís de que s'ha arribat als máxims caràcters permesos
-      // this.checkMaxLength(warningTag, divTag, key1);
+  /**
+   * Removes existing validation messages for a control
+   */
+  private removeExistingMessages(controlName: string): void {
+    const errorMessage = document.getElementById(`error-field-message-${controlName}`);
+    const warningMessage = document.getElementById(`warning-field-message-${controlName}`);
+    
+    if (errorMessage) errorMessage.remove();
+    if (warningMessage) warningMessage.remove();
+  }
+
+  /**
+   * Handles the display of validation errors
+   */
+  public handleErrorState(errorElement: HTMLSpanElement, controlName: string, inputElement: HTMLInputElement, 
+                         form: FormGroup, parentElement: HTMLElement | null): void {
+    const control = form.get(controlName);
+    if (!control || !control.errors) return;
+
+    errorElement.innerHTML = this.getErrorMessage(Object.keys(control.errors));
+
+    if (control.dirty) {
+      if (parentElement) parentElement.append(errorElement);
+      
+      if (inputElement) {
+        inputElement.classList.add('ng-dirty', 'ng-touched', 'error-field');
+        inputElement.classList.remove('ok-field');
+      }
+    } else if (inputElement) {
+      inputElement.classList.remove('ng-dirty', 'ok-field', 'ng-valid');
     }
-    inputTag ? inputTag.classList.add('ok-field', 'ng-valid', 'ng-touched') : null;
-    inputTag ? inputTag.classList.remove('error-field') : null;
   }
 
-  public checkMaxLength(spanTag: any, divTag: any, key1: any) {
-    spanTag.innerHTML = this.translations.maxlengthPermes;
-    divTag.append(spanTag);
+  /**
+   * Handles the display of valid state and max length warnings
+   */
+  public handleValidState(errorElement: HTMLSpanElement, inputElement: HTMLInputElement, warningElement: HTMLSpanElement,
+                         parentElement: HTMLElement | null, controlName: string, form: FormGroup, 
+                         showMaxLengthWarning = false): void {
+    errorElement.innerHTML = this.translations['required'];
+
+    // Show max length warning if enabled and condition is met
+    if (showMaxLengthWarning && this.isMaxLengthReached(inputElement)) {
+      this.displayMaxLengthWarning(warningElement, parentElement, controlName);
+    }
+
+    if (inputElement) {
+      inputElement.classList.add('ok-field', 'ng-valid', 'ng-touched');
+      inputElement.classList.remove('error-field');
+    }
   }
 
-  public orderErrors(errors: any) {
+  /**
+   * Checks if input has reached its maximum length
+   */
+  private isMaxLengthReached(inputElement: HTMLInputElement | null): boolean {
+    return !!(
+      inputElement && 
+      inputElement.maxLength && 
+      inputElement.value && 
+      inputElement.maxLength === inputElement.value.length && 
+      inputElement.classList.contains('ng-touched')
+    );
+  }
+
+  /**
+   * Displays max length warning message
+   */
+  public displayMaxLengthWarning(warningElement: HTMLSpanElement, parentElement: HTMLElement | null, controlName: string): void {
+    warningElement.innerHTML = this.translations['maxLengthWarning'];
+    if (parentElement) parentElement.append(warningElement);
+  }
+
+  /**
+   * Prioritizes and returns the appropriate error message
+   */
+  public getErrorMessage(errors: string[]): string {
     if (errors.includes('required')) {
-      return this.translations.required;
+      return this.translations['required'];
     } else if (errors.includes('whiteSpaceLine')) {
-      return this.translations.whiteSpaceLine;
+      return this.translations['whiteSpaceLine'];
     }
-    return this.translations[errors[0]];
+    return this.translations[errors[0]] || 'Invalid value';
   }
 }

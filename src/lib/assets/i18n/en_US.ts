@@ -1,15 +1,16 @@
-export const translationEnUs = { 
-  requiredGraterThan0: 'The numeric field must be greater than 0', 
-  malformedField: 'Malformed field', 
-  required: 'Field is required', 
-  email: 'Incorrect format', 
-  pattern: 'Incorrect format', 
-  whiteSpaceLine: 'Incorrect format', 
-  maxlength: 'You have exceeded the maximum number of characters', 
-  minlength: 'Incorrect format', 
-  invalid: 'Incorrect format', 
-  maxlengthPermes: 'You have reached the maximum number of characters', 
-  valueNoExist: 'The entered value does not exist in the list', 
-  introducedValueNoExist: 'The requirement does not exist', 
-  number: 'The field must be numeric' 
+export const translationEnUs = {
+  requiredGraterThan0: 'Must be greater than 0',
+  withoutMessage: '',
+  malformedField: 'Invalid field',
+  required: 'Required field',
+  email: 'Invalid email',
+  pattern: 'Invalid format',
+  whiteSpaceLine: 'No leading spaces',
+  maxlength: 'Too many characters',
+  minlength: 'Too short',
+  invalid: 'Invalid input',
+  maxLengthWarning: 'Limit reached',
+  valueNoExist: 'Value not in list',
+  introducedValueNoExist: 'Item not found',
+  number: 'Must be a number'
 };

@@ -1,200 +1,183 @@
+<h1 align="center">NGX Forms Validator</h1>
+<p align="center"><strong>Tiny, fast, and made for Angular Reactive Forms</strong></p>
 
-- [Official Docs](https://ngx-forms-validator.netlify.app/) <br/><br/><br/>
-![NPM Downloads](https://img.shields.io/npm/dt/ngx-forms-validator)
-![NPM License](https://img.shields.io/npm/l/ngx-forms-validator)
-<h1 align="center">ngx-forms-validator</h1>
-<p align="center">Useful forms validator for Angular</p>
+<p align="center">
+  <a href="https://www.npmjs.com/package/ngx-forms-validator">
+    <img src="https://img.shields.io/npm/v/ngx-forms-validator?style=flat-square" alt="npm version">
+  </a>
+  <a href="https://www.npmjs.com/package/ngx-forms-validator">
+    <img src="https://img.shields.io/npm/dt/ngx-forms-validator?style=flat-square" alt="downloads">
+  </a>
+<!--   <a href="https://github.com/apalaciosdev/ngx-forms-validator">
+    <img src="https://img.shields.io/github/stars/apalaciosdev/ngx-forms-validator?style=flat-square" alt="GitHub stars">
+  </a> -->
+</p>
 
-## Table of contents
+<p align="center">
+  <a href="https://ngx-forms-validator.netlify.app">📘 Docs</a> ·
+  <a href="https://www.npmjs.com/package/ngx-forms-validator">📦 NPM</a> ·
+  <a href="https://github.com/apalaciosdev/ngx-forms-validator">⭐ GitHub</a>
+</p>
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Custom Validators]()
-- [Code Demo](https://github.com/apalaciosdev/demo-ngx-forms-validator)
+---
 
+## ✨ Features
 
-## Installation
+- 🚀 Lightweight and dependency-free
+- 🎯 Focused on **Reactive Forms** for Angular
+- 🌍 Multilingual support (English, Spanish, Esperanto)
+- 🧩 Built-in custom validators
+- 💬 Customizable error messages and styling
+- 📏 Configurable behaviors like `markFieldsAsDirty` and `maxLengthWarning`
 
-1. Use npm to install the package
+---
 
-```terminal
-$ npm install ngx-forms-validator --save
+## 📦 Installation
+
+Installing **NGX Forms Validator** is as simple as running a single command in your Angular project:
+
+```bash
+npm i ngx-forms-validator
 ```
 
-2. You could either add into your file `angular.json` the next `styles` property
+Once installed, you're ready to import the library and start validating forms — no additional setup or dependencies required.
+
+## ✅ Angular Compatibility
+
+Supports Angular **14 and above** — fully compatible with the latest Angular versions.
+
+---
+
+## 🚀 Get Started
+
+### 1. Set default language
+
+```ts
+import { TranslateService } from 'ngx-forms-validator';
+
+constructor(private translateService: TranslateService) {
+  this.translateService.setTranslationLanguaje('en_US');
+}
+```
+
+### 2. Add validation service into your form
+
+```ts
+import { FormValidatorService } from 'ngx-forms-validator';
+
+constructor(public formValidatorService: FormValidatorService) {}
+
+ngOnInit(): void {
+  this.form = this.formBuilder.group({
+    name: ['', Validators.required]
+  });
+
+  this.formValidatorService.manageValidateErrors(this.form);
+}
+```
+
+### 3. HTML structure
+
+```html
+<form [formGroup]="form">
+  <div>
+    <input id="name" name="name" formControlName="name" />
+  </div>
+</form>
+```
+
+### 4. Optional configuration
+
+```ts
+this.formValidatorService.manageValidateErrors(this.form, {
+  markFieldsAsDirty: true,
+  showMaxLengthWarning: true
+});
+```
+
+---
+
+## 🧪 Custom Literals
+
+Create your own i18n literals and override the defaults:
+
+```ts
+export const customLiterals = {
+  required: 'This field is required',
+  email: 'Please enter a valid email'
+};
+
+this.translateService.setCustomTranslations(customLiterals);
+```
+
+---
+
+## 🌐 Default Literals
+
+Built-in support for:
+
+- **en_US** (English)
+- **es_ES** (Spanish)
+- **eo_EO** (Esperanto)
+
+---
+
+## 🧱 Custom Validators
+
+Use custom ones included in the lib:
+
+```ts
+onlyNumber → key: number
+hasWhiteSpaceLine → key: whiteSpaceLine
+hasLeadingWhiteSpace → key: whiteSpaceLine
+hasTrailingWhiteSpace → key: whiteSpaceLine
+introducedValueExists → key: introducedValueNoExist
+maxByte → key: maxLength
+```
+
+Or create your own easily:
+
+```ts
+export class CustomValidators {
+  public static noSpecialChars(control: AbstractControl): ValidationErrors | null {
+    return /[^a-zA-Z0-9]/.test(control.value) ? { noSpecialChars: true } : null;
+  }
+}
+```
+
+Then add its literal key to your custom translations.
+
+---
+
+## 🎨 Styling Guide
+
+To use the default styling, include the stylesheet in your `angular.json`:
 
 ```json
 "styles": [
   "node_modules/ngx-forms-validator/styles/styles.scss"
-],
+]
 ```
 
-## Versions
-Also check all available versions:
-- [Angular 16.X.X](https://www.npmjs.com/package/ngx-forms-validator)
-- [Angular 14.X.X](https://www.npmjs.com/package/ngx-forms-validator/v/angular-14)
+You can override the styles using `.ok-field`, `.error-field`, `.warning-field`, etc.
 
+---
 
+## 🔔 Error Message Behavior
 
-## Usage
+You can fine-tune how and when messages appear using:
 
-### 1. Add validation service into your initForm
-First, add these two properties into your constructor
-```typescript
-import { CustomValidators, FormValidatorService } from 'ngx-forms-validator';
+- `markFieldsAsDirty`
+- `showMaxLengthWarning`
 
-constructor(
-  public formBuilder: FormBuilder,
-  public nxgFormsValidatorService : FormValidatorService
-) { }
-```
+---
 
-After, you can add `nxgFormsValidatorService.manageValidateErrors` after declare your form
-```typescript
-this.exampleForm = this.formBuilder.group({
-  name: [this.exampleData.name, [Validators.required]],
-  surname: [this.exampleData.surname, [Validators.required]],
-  years: [this.exampleData.years, [Validators.required]],
-});
-  
-this.nxgFormsValidatorService.manageValidateErrors(this.exampleForm);
-```
+## 🤝 Contribute
 
-### 2. HTML structure
-**Important** to add each input within a unique and personalized **div** for each one.
+Found a bug or want to contribute? Open an issue or PR!
 
-Also, it is necessary to add the same `id` and `name` as the name assigned to the `formControlName`
+---
 
-```html
-<form [formGroup]="exampleForm" class="exampleForm" *ngIf="exampleData">
-  <span>Name</span>
-  <div>
-    <input type="text" name="name" id="name" formControlName="name">
-  </div>
+## 📄 License
 
-  <span>Surname</span>
-  <div class="width40">
-    <input type="text" name="surname" id="surname" formControlName="surname">
-  </div>
-</form>  
-```
-
-### 3. Set default language
-Go to the `app.component` file and add these properties to the constructor
-```typescript 
-import { TranslateService } from 'ngx-forms-validator';
-
-constructor(private translateService: TranslateService) {
-  this.translateService.setTranslationLanguaje('es_ES');
-}
-```
-You can also see [Available languages](#availableLanguages) that come by default in the library (es_ES & en_US).
-
-### 4. Add your custom literals (optional)
-First create a TS file that contains all your literals.
-
-You can name it with the name you want.
-```typescript
-export const customLiterals = { 
-  requiredGraterThan0: 'The numeric field must be greater than 0', 
-  malformedField: 'Malformed field', 
-  required: 'Field is required', 
-  email: 'Incorrect format', 
-};
-```
-
-Then, add your literals in your `app.component` constructor.
-```typescript 
-import { customLiterals } from 'src/assets/i18n/en_US';
-
-constructor(private translateService: TranslateService) {
-  this.translateService.setCustomTranslations(customLiterals);
-}
-```
-
-The priority literals will be your custom literals.
-
-If you don't like a literal that comes by default in the library, you can change its value by adding it to your custom literals file.
-
-See the [literals](#defaultLiterals) that come by default in the library.
-
-## Custom Validators
-In addition to the Validators that Angular provides us, you can create and use your own `Custom Validators`.
-
-In this example we are using `CustomValidators.hasWhiteSpaceLine`, that is already implemented in the library
-```typescript
-this.exampleForm = this.formBuilder.group({
-    name: [this.exampleData.name, [Validators.required, CustomValidators.hasWhiteSpaceLine]],
-    surname: [this.exampleData.surname, [Validators.required, CustomValidators.hasWhiteSpaceLine]],
-    years: [this.exampleData.years, [Validators.required]],
-  });
-```
-
-You can also see the [Custom Validators](#defaultCustomValidators) that come by default in the library.
-
-
-
-<h2 id="availableLanguages">Available Languages</h2>
-- es_ES (Spanish ES)
-- en_US (English US)
-- eo_EO (Esperanto)
-
-<h2 id="defaultLiterals">Default literals</h2>
-es_ES
-
-  - `requiredGraterThan0`: 'El campo numérico tiene que ser mayor a 0'
-  - `malformedField`: 'Formato del campo incorrecto'
-  - `required`: 'El campo es obligatorio'
-  - `email`: 'Formato incorrecto'
-  - `pattern`: 'Formato incorrecto'
-  - `whiteSpaceLine`: 'Formato incorrecto'
-  - `maxlength`: 'Has excedido el máximo de caracteres'
-  - `minlength`: 'Formato incorrecto'
-  - `invalid`: 'Formato incorrecto'
-  - `maxlengthPermes`: 'Has llegado al máximo de caracteres'
-  - `valueNoExist`: 'El valor introducido no existe en la lista'
-  - `introducedValueNoExist`: 'El requisito no existe'
-  - `number`: 'El campo tiene que ser numérico
-
-en_US
-  - `requiredGraterThan0`: 'The numeric field must be greater than 0'
-  - `malformedField`: 'Malformed field'
-  - `required`: 'Field is required'
-  - `email`: 'Incorrect format'
-  - `pattern`: 'Incorrect format'
-  - `whiteSpaceLine`: 'Incorrect format'
-  - `maxlength`: 'You have exceeded the maximum number of characters'
-  - `minlength`: 'Incorrect format'
-  - `invalid`: 'Incorrect format'
-  - `maxlengthPermes`: 'You have reached the maximum number of characters'
-  - `valueNoExist`: 'The entered value does not exist in the list'
-  - `introducedValueNoExist`: 'The requirement does not exist'
-  - `number`: 'The field must be numeric
-
-eo_EO
-  - `requiredGraterThan0`: 'La numerika kampo devas esti pli granda ol 0',
-  - `malformedField`: 'Misformita kampo',
-  - `required`: 'Kampo estas postulata',
-  - `email`: 'Malĝusta formato',
-  - `pattern`: 'Malĝusta formato',
-  - `whiteSpaceLine`: 'Malĝusta formato',
-  - `maxlength`: 'Vi superis la maksimuman nombron de signoj',
-  - `minlength`: 'Malĝusta formato',
-  - `invalid`: 'Malĝusta formato',
-  - `maxlengthPermes`: 'Vi atingis la maksimuman nombron de signoj',
-  - `valueNoExist`: 'La enigita valoro ne ekzistas en la listo',
-  - `introducedValueNoExist`: 'La postulo ne ekzistas',
-  - `number`: 'La kampo devas esti numerika'
-
-<h2 id="defaultCustomValidators">Default Custom Validators</h2>
-
-  - `onlyNumber`: Only numbers are allowed
-  - `hasWhiteSpaceLine`: Input cannot be empty or contain only white spaces
-  - `introducedValueExists(array, string?)`: Passing an array as a parameter, the existence of the value is checked. If it doesn't exist, an error is generated 
-  (Also, if you put 'none' as the second parameter, no error message will be displayed. Only the input will be highlighted in red. This param is optional)
-  ```typescript
-   name: [this.exampleData.name, [Validators.required, CustomValidators.introducedValueExists(['John', 'Alicia'], 'none')]],
-  ```
-  - `maxByte(number)`: Maximum allowed number of bytes.
-  
-
+MIT © [apalacios.dev](https://github.com/apalaciosdev)
